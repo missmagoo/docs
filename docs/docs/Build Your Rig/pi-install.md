@@ -2,7 +2,7 @@
 
 ### Download Raspbian and write it to your microSD card ###
 
-Following the [install instructions](https://www.raspberrypi.org/documentation/installation/installing-images/README.md), download Raspbian Lite (you do **not** want Raspbian Desktop) and write it to an microSD card using Etcher.
+Following the [install instructions](https://www.raspberrypi.org/documentation/installation/installing-images/README.md), and download the imager. Once you've opened the imager, under Choose OS click Raspberry Pi OS (other) --> Raspberry Pi OS LITE (32-bit). Select your SD card for the storage option, and then click "WRITE"
 
 ### Place your wifi and ssh configs on the new microSD card ###
 
@@ -23,7 +23,7 @@ network={
 You will need to replace xx after country with the correct ISO3166-1 Alpha-2 country code for your country (such as US, UK, DE, etc) - otherwise wifi will remain disabled on the Pi.
 
 To enable SSH login to the Pi, you will need to create an empty file named `ssh` (with no file extention).
-On Windows, you can make this file appear on your Desktop by opening the command prompt and typing:
+On Windows, you can make this file appear on your Desktop by opening the command prompt/Powershell and typing:
 ```
 cd %HOMEPATH%\Desktop
 type NUL > ssh
@@ -33,14 +33,15 @@ On a Mac, the equivalent command is:
 cd ~/Desktop/
 touch ssh
 ```
-
 When you are done, copy it from your Desktop to the boot drive of your SD card. Now you will need to [boot up your Pi and connect to it](#boot-up-your-pi-and-connect-to-it).
+
+If the Windows command prompt/Powershell does not work, open the Boot Drive folder in the File Explorer. Right click --> Create new txt file. Name it ssh. It will automatically save as a TXT file. Delete the .txt extension and hit enter to save it as a File.
 
 ****
 
 ## Boot up your Pi and connect to it ##
 
-After the writing is done, you can eject the microSD card from your computer and insert it into your Pi (card slot location shown below), then plug in power to the Pi and turn on the power switch (off/on positions are labeled on the HAT board for ease).
+After the writing is done, you can eject the microSD card from your computer and insert it into your Pi (card slot location shown below), then plug in power to the Pi and turn on the power switch (off/on positions are labeled on the HAT board for ease). If your Pi does not have an on/off switch, you will not need to do anything.
 
 !["install piBakery"](../Images/build-your-rig/pi-insert.jpg)
 
@@ -48,11 +49,11 @@ Give the rig a couple minutes to boot up.  Once the green LED stops blinking as 
 
 On Mac, open Terminal and use `ssh pi@raspberrypi.local`
 
-On Windows, use PuTTY and establish an SSH connection, with username `pi`, to hostname `raspberrypi.local`. If you receive a warning that the rig's host key is not yet cached, respond YES to add it.
+On Windows, use PuTTY and establish an SSH connection, with username `pi`, to hostname `raspberrypi.local`. If you receive a warning that the rig's host key is not yet cached, respond YES to add it. If there is not a spot for the username, type `pi@raspberrypi.local` in the hostname. 
 
 Troubleshooting:  If you have problems connecting, try rebooting your router.
 
-The default password for logging in as `pi` is `raspberry`.  The `pi` username and default password is only used for this initial connection: subsequently you'll log in as `root` with a password and rig hostname of your choosing.
+The default password for logging in as `pi` is `raspberry`.  The `pi` username and default password is only used for this initial connection: subsequently you'll log in as `root` with a password and rig hostname of your choosing. The password WILL NOT SHOW UP. Hit enter once you have typed the password.
 
 ### Run openaps-install.sh ###
 
@@ -65,9 +66,9 @@ curl -s https://raw.githubusercontent.com/openaps/oref0/master/bin/openaps-insta
 
 * Change your hostname (a.k.a, your rig's name). **Make sure to write down your hostname; this is how you will log in in the future as `ssh root@whatyounamedit.local`**
 
-* You'll be prompted to set two passwords; one for root user and one for pi user.  You'll want to change the password to something personal so your device is secure. Make sure to write down/remember your password; this is what you'll use to log in to your rig moving forward. You'll type it twice for each user.  There is no recovery of this password if you forget it.  You will have to start over from the top of this page if you forget your password.
+* You'll be prompted to set two passwords; one for root user and one for pi user.  You'll want to change the password to something personal so your device is secure. Make sure to write down/remember your password; this is what you'll use to log in to your rig moving forward. You'll type it twice for each user.  There is no recovery of this password if you forget it.  You will have to start over from the top of this page if you forget your password. These passwords WILL NOT SHOW UP.
 
-* Pick your time zone (e.g., In the US, you'd select `US` and then scroll and find your time zone, such as `Pacific New` if you're in California).
+* Pick your time zone (e.g., In the US, you'd scroll down to select `US` and then scroll and find your time zone, such as `Pacific New` if you're in California).
 
 The script will then continue to run awhile longer (10 to 30 minutes) before asking you to press `enter or control-c` for the setup script options.  Successful completion of this section should look like below.  
 
